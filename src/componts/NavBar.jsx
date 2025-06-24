@@ -1,30 +1,40 @@
 import React, { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; // Added useNavigate for redirection
 import logo1 from '../assets/logo1.png';
-import { FaHome, FaListAlt, FaInfo, FaComment, FaMapMarkerAlt, FaStoreAlt, FaShoppingCart } from 'react-icons/fa';
+import { FaHome, FaListAlt, FaInfo, FaComment, FaMapMarkerAlt, FaStoreAlt, FaShoppingCart, FaSignOutAlt } from 'react-icons/fa';
 import { CartContext } from '../context/CartContext'; // Import CartContext
 
 function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { cartItems } = useContext(CartContext); // Get the cartItems from context
+  const navigate = useNavigate(); // Hook for navigation
 
   // Calculate total quantity of items in the cart
   const totalItemsInCart = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+
+  // Function to handle logout
+  const handleLogout = () => {
+    // Clear any authentication tokens or user data from storage
+    localStorage.removeItem('user'); // If you're storing user data in localStorage (or use sessionStorage)
+    // Close the menu if it's open
+    setIsMenuOpen(false);
+    // Redirect to the landing page after logout
+    navigate('/');
+  };
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
   return (
-    
     <div className="fixed top-0 left-0 right-0 z-50">
       <nav className="bg-white border-gray-200 py-2.5 dark:bg-gray-900">
         <div className="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto">
           {/* Logo and Name */}
-          <a href="#" className="flex items-center">
+          <Link to="/" className="flex items-center">
             <img src={logo1} className="logo-nav h-6 mr-3 sm:h-9" alt="Omkar Cafe Logo" />
-            <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white hidden sm:inline">Omkar Cafe</span>
-          </a>
+            <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white hidden sm:inline">Modern Cafe</span>
+          </Link>
 
           {/* Cart button and Mobile Menu Toggle */}
           <div className="flex items-center lg:order-2">
@@ -68,7 +78,7 @@ function NavBar() {
             <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
               <li>
                 <Link
-                  to="home"
+                  to="/"
                   className="flex items-center py-2 pl-3 pr-4 text-gray-700 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
                 >
                   <FaHome className="text-xl" />
@@ -119,6 +129,16 @@ function NavBar() {
                   <FaStoreAlt className="text-xl" />
                   <span className="hidden sm:inline ml-2">Outlets</span>
                 </Link>
+              </li>
+              {/* Logout Link */}
+              <li>
+                <button
+                  onClick={handleLogout}
+                  className="flex items-center py-2 pl-3 pr-4 text-gray-700 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+                >
+                  <FaSignOutAlt className="text-xl" />
+                  <span className="hidden sm:inline ml-2">Logout</span>
+                </button>
               </li>
             </ul>
           </div>
@@ -189,6 +209,16 @@ function NavBar() {
               >
                 <FaStoreAlt className="text-xl inline-block" /> Outlets
               </Link>
+            </li>
+            {/* Logout Link */}
+            <li>
+              <button
+                onClick={handleLogout}
+                className="block py-2 text-gray-700 hover:bg-gray-50 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                
+              >
+                <FaSignOutAlt className="text-xl inline-block" /> Logout
+              </button>
             </li>
           </ul>
         </div>

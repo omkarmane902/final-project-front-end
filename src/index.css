@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 
-
 @layer components {
   .animate__fadeIn {
     animation: fadeIn 2s ease-in-out;

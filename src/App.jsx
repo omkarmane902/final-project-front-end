@@ -2,6 +2,7 @@ import React from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 
 // Pages
+
 import Home from './page/Home';
 import Menu from './page/Menu';
 import About from './page/About';
@@ -11,23 +12,28 @@ import Outlets from './page/Outlets';
 import Ad_to_Cart from './page/Ad_to_Cart';
 import LandingPage from './page/LandingPage'; // New Landing Page
 
+import PaymentPage from './context/PaymentPage';
+import PaymentSuccess from './context/PaymentSuccess';
+import PaymentFailure from './context/PaymentFailure';
+
+
 // Components
 import NavBar from './componts/NavBar';
 
-
 // Contexts
 import { CartProvider } from './context/CartContext';
+import AdminPage from './componts/AdminPage';
 
 function App() {
   const location = useLocation();
 
-  // Determine if the current route is LandingPage
-  const isLandingPage = location.pathname === '/';
+  // Check if the current route is either LandingPage or AdminPage
+  const isLandingOrAdminPage = location.pathname === '/' || location.pathname === '/admin';
 
   return (
     <CartProvider>
-      {/* Conditionally render NavBar */}
-      {!isLandingPage && <NavBar />}
+      {/* Conditionally render NavBar for all routes except LandingPage and AdminPage */}
+      {!isLandingOrAdminPage && <NavBar />}
 
       {/* Main Content */}
       <Routes>
@@ -42,7 +48,10 @@ function App() {
         <Route path="/location" element={<Location />} />
         <Route path="/outlets" element={<Outlets />} />
         <Route path="/add-to-cart" element={<Ad_to_Cart />} />
-        
+        <Route path="/admin" element={<AdminPage />} /> {/* Admin Route */}
+        <Route path="/payment" element={<PaymentPage />} />
+        <Route path="/payment-success" element={<PaymentSuccess />} />
+        <Route path="/payment-failure" element={<PaymentFailure />} />
         {/* Fallback Route for Undefined Paths */}
         <Route path="*" element={<NotFound />} />
       </Routes>

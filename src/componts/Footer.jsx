@@ -8,7 +8,7 @@ function Footer() {
         {/* Brand Section */}
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold mb-2">
-            <FaCoffee className="inline-block mr-2 text-yellow-400" /> Omkar Cafe
+            <FaCoffee className="inline-block mr-2 text-yellow-400" /> Modern Cafe
           </h1>
           <p className="text-lg italic text-gray-300">
             Where great coffee meets great company
@@ -26,7 +26,7 @@ function Footer() {
               📞 Call: <a href="tel:+918625906485" className="hover:text-yellow-400 transition">+91 8625906485</a>
             </p>
             <p className="text-lg mb-2">
-              📧 Email: <a href="mailto:info@omkarcafe.com" className="hover:text-yellow-400 transition">info@omkarcafe.com</a>
+              📧 Email: <a href="mailto:info@omkarcafe.com" className="hover:text-yellow-400 transition">info@Moderncafe.com</a>
             </p>
             <p className="text-lg">
               📍 Address: <span className="hover:text-yellow-400 transition">Islampur, Maharashtra, India</span>
@@ -86,7 +86,7 @@ function Footer() {
 
         {/* Footer Bottom */}
         <div className="text-center mt-8">
-          <p className="text-sm text-gray-500">&copy; 2024 Omkar Cafe. All rights reserved.</p>
+          <p className="text-sm text-gray-500">&copy; 2024 Modern Cafe. All rights reserved.</p>
         </div>
       </div>
     </footer>
