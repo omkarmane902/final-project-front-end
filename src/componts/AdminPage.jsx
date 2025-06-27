@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { CartContext } from '../context/CartContext';
-import { FaCogs, FaTrashAlt, FaShippingFast, FaCheck, FaHourglassStart } from 'react-icons/fa';
+import { FaCogs, FaTrashAlt, FaShippingFast, FaCheck, FaHourglassStart, FaTable } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 
 function AdminPage() {
@@ -8,8 +8,7 @@ function AdminPage() {
   const [statusUpdate, setStatusUpdate] = useState({});
 
   useEffect(() => {
-    // Reset local status updates if orders change externally (optional)
-    // setStatusUpdate({});
+    // Reset status updates if needed
   }, [orders]);
 
   const handleRemoveOrder = (orderId) => {
@@ -17,19 +16,14 @@ function AdminPage() {
   };
 
   const handleStatusChange = (orderId) => {
-    // Get the current status considering local updates
     const currentStatus = statusUpdate[orderId] || orders.find(o => o.id === orderId)?.status || 'Pending';
 
-    // Calculate the next status
-    const nextStatus = 
+    const nextStatus =
       currentStatus === 'Pending' ? 'Shipped' :
       currentStatus === 'Shipped' ? 'Completed' :
       'Pending';
 
-    // Update local state for UI feedback
     setStatusUpdate(prev => ({ ...prev, [orderId]: nextStatus }));
-
-    // Call context function to update backend or global state
     updateOrderStatus(orderId, nextStatus);
   };
 
@@ -56,7 +50,15 @@ function AdminPage() {
                 className="order-card bg-white p-6 rounded-lg shadow-lg border border-gray-300 transform transition-all hover:scale-105 hover:shadow-xl"
               >
                 <h3 className="text-2xl font-semibold text-gray-800 mb-4">Order #{index + 1}</h3>
-                <p className="text-md text-gray-600 mb-4">
+
+                {/* ✅ Show Table Number */}
+                {order.tableNumber && (
+                  <p className="text-md text-blue-700 font-medium mb-2 flex items-center">
+                    <FaTable className="mr-2" /> Table: {order.tableNumber}
+                  </p>
+                )}
+
+                <p className="text-md text-gray-600 mb-2">
                   Status: <span className={`font-bold ${currentStatus === 'Completed' ? 'text-green-600' : 'text-yellow-600'}`}>
                     {currentStatus}
                   </span>
@@ -83,6 +85,18 @@ function AdminPage() {
                     ))}
                   </ul>
                 </div>
+
+                {/* ✅ Show Payment Screenshot */}
+                {order.paymentScreenshot && (
+                  <div className="mt-6">
+                    <p className="font-semibold text-gray-800 mb-2">Payment Screenshot:</p>
+                    <img
+                      src={order.paymentScreenshot}
+                      alt="Payment Proof"
+                      className="w-full max-w-xs border rounded-lg shadow"
+                    />
+                  </div>
+                )}
 
                 <motion.button
                   onClick={() => handleRemoveOrder(order.id)}

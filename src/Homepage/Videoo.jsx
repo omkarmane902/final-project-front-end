@@ -3,30 +3,29 @@ import React, { useState, useEffect } from 'react';
 function Videoo() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [fadeIn, setFadeIn] = useState(true);
+
   const content = [
-    { type: 'video', src: './video/video_2.mp4' },
+    { type: 'video', src: '/video/video_2.mp4' },
     { type: 'video', src: 'https://cdn.pixabay.com/video/2020/03/05/33256-396487978_large.mp4' },
-    { type: 'video', src: './video/video_3.mp4' },
-    { type: 'video', src: './video/video_4.mp4' },
-    { type: 'video', src: './video/123629-728697948.mp4' },
+    { type: 'video', src: '/video/video_3.mp4' },
+    { type: 'video', src: '/video/video_4.mp4' },
+    { type: 'video', src: '/video/123629-728697948.mp4' },
   ];
 
-  // Change video every 5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
-      setFadeIn(false); // Start fade out effect
+      setFadeIn(false);
       setTimeout(() => {
-        setCurrentSlide((prev) => (prev + 1) % content.length); // Switch to next video
-        setFadeIn(true); // Start fade in effect
-      }, 500); // Fade-out duration
-    }, 5000); // Video change interval (5 seconds)
+        setCurrentSlide((prev) => (prev + 1) % content.length);
+        setFadeIn(true);
+      }, 500);
+    }, 5000);
 
-    return () => clearInterval(interval); // Cleanup interval on component unmount
+    return () => clearInterval(interval);
   }, [currentSlide]);
 
   return (
     <div className="flex">
-      {/* Video background section */}
       <section className="relative h-screen flex flex-col items-center justify-center text-center w-full">
         <div
           className={`absolute top-0 left-0 w-full h-full overflow-hidden transition-opacity duration-500 ${
@@ -36,7 +35,6 @@ function Videoo() {
           <video
             className="min-w-full min-h-full absolute object-cover filter"
             src={content[currentSlide].src}
-            type="video/mp4"
             autoPlay
             muted
             loop
@@ -54,7 +52,7 @@ function Videoo() {
         </div>
       </section>
     </div>
-  ); 
+  );
 }
 
 export default Videoo;
