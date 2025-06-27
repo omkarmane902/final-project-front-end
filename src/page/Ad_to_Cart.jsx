@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { CartContext } from '../context/CartContext';
 import { FaTrashAlt, FaShoppingCart, FaClipboardList, FaDollarSign } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-
+import AddIcon from '@mui/icons-material/Add';
 function AddToCart() {
   const { cartItems, removeFromCart, updateQuantity, placeOrder } = useContext(CartContext);
   const [packingCharge, setPackingCharge] = useState(10);

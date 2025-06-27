@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { CartContext } from '../context/CartContext'; // Import CartContext
 import { FaUtensils, FaCoffee, FaHamburger, FaPizzaSlice, FaGlassWhiskey, FaConciergeBell, FaTrashAlt } from 'react-icons/fa'; // Import icons
-
+import AddIcon from '@mui/icons-material/Add';
 function Menu() {
   const { addToCart, removeFromCart, cartItems } = useContext(CartContext); // Get addToCart, removeFromCart from CartContext
   const [searchQuery, setSearchQuery] = useState('');

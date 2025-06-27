@@ -5,7 +5,7 @@ import Slider from 'react-slick'; // Importing the Slider component
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { FaStar, FaUtensils, FaUsers, FaHamburger, FaCarrot, FaFish } from 'react-icons/fa'; // Importing relevant icons
-
+import AddIcon from '@mui/icons-material/Add';
 function Home() {
   const menuItems = [
     {

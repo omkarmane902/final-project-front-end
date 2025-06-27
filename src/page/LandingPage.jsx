@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import AddIcon from '@mui/icons-material/Add';
 function LandingPage() {
   const [showLogin, setShowLogin] = useState(false); // To toggle login form
   const navigate = useNavigate(); // For navigation between pages
